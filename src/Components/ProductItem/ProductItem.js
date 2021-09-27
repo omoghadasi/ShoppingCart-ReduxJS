@@ -3,7 +3,7 @@ import './ProductItem.css'
 function ProductItem({product}){
     const {image,title,price,description,rating}=product
     return(
-        <div className="col-2 p-3 product-card">
+        <div className="p-3 product-card">
             <img src={image}
                  alt={title}/>
             <div className="d-flex justify-content-between">
