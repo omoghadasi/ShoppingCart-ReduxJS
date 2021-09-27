@@ -3,14 +3,13 @@ import './App.css';
 import {Component} from "react";
 import axios from "axios";
 import ProductsList from "./Components/ProductsList/ProductsList";
+import {connect} from "react-redux";
+import {receiveProducts} from "./Actions";
 
 class App extends Component {
-  state={
-    products:[]
-  }
   componentDidMount(){
     axios.get('https://fakestoreapi.com/products')
-        .then(res=> this.setState({products:res.data}))
+        .then(res=> this.props.receiveProducts(res.data))
         .catch(err=>console.log(err))
   }
 
@@ -19,10 +18,13 @@ class App extends Component {
         <div className="App">
           <h2>Shopping Cart Example</h2>
           <hr/>
-            <ProductsList products={this.state.products}/>
+            <ProductsList/>
         </div>
     );
   }
 }
 
-export default App;
+const mapDispatchToProps=dispatch=>({
+        receiveProducts : products=>dispatch(receiveProducts(products))
+})
+export default connect(null,mapDispatchToProps)(App);
