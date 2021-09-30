@@ -5,6 +5,7 @@ import axios from "axios";
 import ProductsList from "./Components/ProductsList/ProductsList";
 import {connect} from "react-redux";
 import {receiveProducts} from "./Actions";
+import Cart from "./Components/Cart/Cart";
 
 class App extends Component {
   componentDidMount(){
@@ -19,6 +20,8 @@ class App extends Component {
           <h2>Shopping Cart Example</h2>
           <hr/>
             <ProductsList/>
+            <hr/>
+            <Cart/>
         </div>
     );
   }

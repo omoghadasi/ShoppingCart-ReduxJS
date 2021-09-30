@@ -1,6 +1,6 @@
 import './ProductItem.css'
 
-function ProductItem({product}){
+function ProductItem({product,onAddToCartClicked}){
     const {image,title,price,description,rating}=product
     return(
         <div className="p-3 product-card">
@@ -12,7 +12,7 @@ function ProductItem({product}){
             </div>
             <small>{description.toString().substr(0,100)} ...</small>
 
-            <button className="d-block col-12 mt-3" disabled={rating.count >0 ? '' : 'disabled'}>{rating.count >0 ? `Add To Cart - ${rating.count}` : 'Sold Out'}</button>
+            <button className="d-block col-12 mt-3" disabled={rating.count >0 ? '' : 'disabled'} onClick={onAddToCartClicked}>{rating.count >0 ? `Add To Cart - ${rating.count}` : 'Sold Out'}</button>
         </div>
     )
 }

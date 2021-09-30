@@ -4,8 +4,9 @@ import './ProductsList.css'
 import ProductItem from "../ProductItem/ProductItem";
 import Slider from "react-slick"
 import {connect} from "react-redux";
+import {addToCart} from "../../Actions";
 
-function ProductsList({products}) {
+function ProductsList({products,addToCart}) {
     const settings = {
         dots: true,
         infinite: true,
@@ -21,17 +22,22 @@ function ProductsList({products}) {
             <div className="col-12">
                 <Slider {...settings}>
                     {products.map(product => <ProductItem key={product.id}
-                                                          product={product}/>)}
+                                                          product={product}
+                                                          onAddToCartClicked={() => addToCart(product.id)}/>)}
                 </Slider>
             </div>
         </div>
     )
 }
 
-const getProduct=products=>Object.keys(products).map(id=>products[id])
+const getProduct = products => Object.keys(products).map(id => products[id])
 
-const mapStateToProps=state=>({
-        products: getProduct(state.products)
+const mapStateToProps = state => ({
+    products: getProduct(state.products)
 })
 
-export default connect(mapStateToProps)(ProductsList);
+const mapDispatchToProps = dispatch => ({
+    addToCart: productId => dispatch(addToCart(productId))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsList);
